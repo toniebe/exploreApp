@@ -9,15 +9,15 @@ workflows:
       vars:
         PACKAGE_NAME: 'com.exploreApp' # <-- Put your package name here e.g. com.domain.myapp
         node: latest
-      triggering:
-        events:
-          - push
-          - tag
-          - pull_request
-        branch_patterns:
-          - pattern: main
-            include: true
-            source: true
+    triggering:
+      events:
+        - push
+        - tag
+        - pull_request
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
     scripts:
       - name: pre_build_script
         script: |
