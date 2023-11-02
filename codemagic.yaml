@@ -9,7 +9,7 @@ workflows:
       vars:
         PACKAGE_NAME: 'com.exploreApp' # <-- Put your package name here e.g. com.domain.myapp
         node: latest
-        triggering:
+      triggering:
         events:
           - push
           - tag
@@ -18,56 +18,45 @@ workflows:
           - pattern: main
             include: true
             source: true
-      scripts:
+    scripts:
       - name: pre_build_script
-        script: | 
+        script: |
           #!/usr/bin/env sh
           export VARNAME="my value"
           set -e # exit on first failed command
           echo $ANDROID_FIREBASE_SECRET | base64 --decode > $CM_BUILD_DIR/android/app/google-services.json
-          
-          
       - name: Install yarn dependencies
         script: |
           yarn
       - name: Set Android SDK location
         script: |
-          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$FCI_BUILD_DIR/android/local.properties"
-          
-          
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$FCI_BUILD_DIR/android/local.properties"         
       - name: Set up keystore
         script: |
           echo $CM_KEYSTORE | base64 --decode > /tmp/keystore.keystore
           # The following script creates key.properties file and stores the credentials in it. As we configure code signing in app/build.gradle file, the following part is unnecessary unless code signing is configured differently as explained in the documentation: https://docs.codemagic.io/flutter-code-signing/android-code-signing/
-           cat >> "$FCI_BUILD_DIR/android/key.properties" <<EOF
-           storePassword=$CM_KEYSTORE_PASSWORD
-           keyPassword=$CM_KEY_ALIAS_PASSWORD
-           keyAlias=$CM_KEY_ALIAS_USERNAME
-           storeFile=/tmp/keystore.keystore
-           EOF
-           
-          
+          cat >> "$FCI_BUILD_DIR/android/key.properties" <<EOF
+          storePassword=$CM_KEYSTORE_PASSWORD
+          keyPassword=$CM_KEY_ALIAS_PASSWORD
+          keyAlias=$CM_KEY_ALIAS_USERNAME
+          storeFile=/tmp/keystore.keystore
+          EOF
       - name: Build Android release
         script: |
           # Set environment variable so it can be used to increment build number in android/app/build.gradle
           # Note that tracks can be specified when retrieving latest build number from Google Play, for example:
           # export NEW_BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME" --tracks=alpha) + 1))
           # export LATEST_GOOGLE_PLAY_BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME") + 1))
-          
           # cd hello_world/android/ && ./gradlew assembleDebug
-           cd android && ./gradlew assembleRelease
-           
-           
+          cd android && ./gradlew assembleRelease
     artifacts:
       - android/app/build/outputs/**/*.apk
-
-     publishing:
+    publishing:
       # See the following link for details about email publishing - https://docs.codemagic.io/publishing-yaml/distribution/#email
       email:
         recipients:
           - ahmadfathonizumaro@gmail.com
           - toniebe48@gmail.com
-          
         notify:
           success: true # To not receive a notification when a build succeeds
           failure: false # To not receive a notification when a build fails
