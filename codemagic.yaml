@@ -2,9 +2,6 @@ workflows:
     react-native:
         name: React Native App Android
         environment:
-            vars:
-                XCODE_WORKSPACE: "exploreApp"
-                XCODE_SCHEME: "exploreApp"
             node: latest
         scripts:
             - npm install
