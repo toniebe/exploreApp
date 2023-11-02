@@ -49,7 +49,7 @@ export default function SplashScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Text>Explore App</Text>
+      <Text>Explore App Test</Text>
     </View>
   );
 }
