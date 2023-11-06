@@ -66,4 +66,5 @@ workflows:
           app_id: com.exploreapp
           groups: 
             - appTester
+          artifact_type: 'apk'
         
