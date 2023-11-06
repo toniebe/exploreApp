@@ -63,7 +63,7 @@ workflows:
       firebase:
         firebase_service_account: $FIREBASE_SERVICE_ACCOUNT
         android: 
-          app_id: com.exploreapp
+          app_id: exploreapp-ce2bc
           groups: 
             - appTester
           artifact_type: 'apk'
