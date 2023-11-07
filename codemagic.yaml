@@ -5,7 +5,8 @@ workflows:
     environment:
       groups:
         - keystore credentials
-        - firebase_credentials 
+        - firebase_credentials
+        - discord_credentials 
       vars:
         PACKAGE_NAME: 'com.exploreApp' # <-- Put your package name here e.g. com.domain.myapp
         node: latest
