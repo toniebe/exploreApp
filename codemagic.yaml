@@ -10,7 +10,8 @@ workflows:
       vars:
         PACKAGE_NAME: 'com.exploreApp' # <-- Put your package name here e.g. com.domain.myapp
         node: latest
-        CM_CLONE_DEPTH: 3
+        CM_CLONE_DEPTH: 8
+        CM_PULL_REQUEST: true
     triggering:
       events:
         - push
@@ -32,9 +33,13 @@ workflows:
       - name: Generating release notes with git commits
         script: | 
           git fetch --all --tags
-          prev_tag=$(git for-each-ref --sort=-creatordate  --format '%(objectname)' refs/tags | sed -n 2p )
-          notes=$(git log --pretty=format:"\n- %s" "$prev_tag"..HEAD)
-          echo "$notes" | tee release_notes.txt
+          git fetch origin +refs/heads/*:refs/remotes/origin/*
+          branch=$(git branch --show-current)
+          prev_tag=$(git for-each-ref --sort=-creatordate --format '%(objectname)' refs/tags | sed -n 2p )
+          notes+=${git log origin/main...HEAD --oneline --pretty=format:"- %s" }
+          notes=$(git log --oneline "$branch" --pretty=format:"- %s" "$prev_tag"..HEAD)
+
+          echo "[Explore App - $branch] \n\nNotes: \n$notes" | tee release_notes.txt
       - name: pre_build_script
         script: |
           #!/usr/bin/env sh
