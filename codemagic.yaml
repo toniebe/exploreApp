@@ -12,6 +12,8 @@ workflows:
         node: latest
         CM_CLONE_DEPTH: 8
         CM_PULL_REQUEST: true
+        CM_PULL_REQUEST_BASE_BRANCH: main
+
     triggering:
       events:
         - push
@@ -33,13 +35,18 @@ workflows:
       - name: Generating release notes with git commits
         script: | 
           git fetch --all --tags
-          git fetch origin +refs/heads/*:refs/remotes/origin/*
           branch=$(git branch --show-current)
           prev_tag=$(git for-each-ref --sort=-creatordate --format '%(objectname)' refs/tags | sed -n 2p )
-          notes+=${git log origin/main...HEAD --oneline --pretty=format:"- %s" }
-          notes+=$(git log --oneline "$branch" --pretty=format:"- %s" "$prev_tag"..HEAD)
-
+          notes=$(git log --oneline "$branch" --pretty=format:"- %s" "$prev_tag"..HEAD)
           echo "[Explore App - $branch] \n\nNotes: \n$notes" | tee release_notes.txt
+      - name: Display changes on pull request
+        script: |
+          if [ "$CM_PULL_REQUEST" != "false" ]; then
+            git fetch origin +refs/heads/*:refs/remotes/origin/*
+            # sesuain variable name di env variable yg di set codemagic
+            git log origin/${CM_PULL_REQUEST_BASE_BRANCH:-develop}...HEAD --oneline
+            # ganti branchnya
+          fi
       - name: pre_build_script
         script: |
           #!/usr/bin/env sh
