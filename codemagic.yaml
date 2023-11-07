@@ -44,7 +44,7 @@ workflows:
           if [ "$CM_PULL_REQUEST" != "false" ]; then
             git fetch origin +refs/heads/*:refs/remotes/origin/*
             # sesuain variable name di env variable yg di set codemagic
-            git log origin/${CM_PULL_REQUEST_BASE_BRANCH:-develop}...HEAD --oneline
+            git log origin/${CM_PULL_REQUEST_BASE_BRANCH:-main}...HEAD --oneline
             # ganti branchnya
           fi
       - name: pre_build_script
