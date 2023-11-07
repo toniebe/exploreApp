@@ -37,7 +37,7 @@ workflows:
           branch=$(git branch --show-current)
           prev_tag=$(git for-each-ref --sort=-creatordate --format '%(objectname)' refs/tags | sed -n 2p )
           notes+=${git log origin/main...HEAD --oneline --pretty=format:"- %s" }
-          notes=$(git log --oneline "$branch" --pretty=format:"- %s" "$prev_tag"..HEAD)
+          notes+=$(git log --oneline "$branch" --pretty=format:"- %s" "$prev_tag"..HEAD)
 
           echo "[Explore App - $branch] \n\nNotes: \n$notes" | tee release_notes.txt
       - name: pre_build_script
