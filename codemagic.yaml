@@ -10,6 +10,7 @@ workflows:
       vars:
         PACKAGE_NAME: 'com.exploreApp' # <-- Put your package name here e.g. com.domain.myapp
         node: latest
+        CM_CLONE_DEPTH: 3
     triggering:
       events:
         - push
@@ -28,6 +29,12 @@ workflows:
             else
              echo "$(git-changelog generate --previous-commit $CM_PREVIOUS_COMMIT)" | tee release_notes.txt
           fi
+      - name: Generating release notes with git commits
+        script: | 
+          git fetch --all --tags
+          prev_tag=$(git for-each-ref --sort=-creatordate  --format '%(objectname)' refs/tags | sed -n 2p )
+          notes=$(git log --pretty=format:"\n- %s" "$prev_tag"..HEAD)
+          echo "$notes" | tee release_notes.txt
       - name: pre_build_script
         script: |
           #!/usr/bin/env sh
