@@ -12,7 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		68B706E54C037B51A48B2EBB /* Pods_exploreApp_exploreAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66DEF79A5D67FB2AEB966CCA /* Pods_exploreApp_exploreAppTests.framework */; };
-		777EEAF22AC2C5DC00E4FD59 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 777EEAF12AC2C5DC00E4FD59 /* GoogleService-Info.plist */; };
+		778B5F2C2AFC916B002CF4DE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 778B5F2B2AFC916B002CF4DE /* GoogleService-Info.plist */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		CCC097D3B4B7C350A4CE8AA3 /* Pods_exploreApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA377E71317831541B9B2C76 /* Pods_exploreApp.framework */; };
 /* End PBXBuildFile section */
@@ -42,7 +42,7 @@
 		5B7EB9410499542E8C5724F5 /* Pods-exploreApp-exploreAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-exploreApp-exploreAppTests.debug.xcconfig"; path = "Target Support Files/Pods-exploreApp-exploreAppTests/Pods-exploreApp-exploreAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		66DEF79A5D67FB2AEB966CCA /* Pods_exploreApp_exploreAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_exploreApp_exploreAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		774333502AC2E10B00A3E204 /* exploreApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = exploreApp.entitlements; path = exploreApp/exploreApp.entitlements; sourceTree = "<group>"; };
-		777EEAF12AC2C5DC00E4FD59 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		778B5F2B2AFC916B002CF4DE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = exploreApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-exploreApp-exploreAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-exploreApp-exploreAppTests.release.xcconfig"; path = "Target Support Files/Pods-exploreApp-exploreAppTests/Pods-exploreApp-exploreAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		EA377E71317831541B9B2C76 /* Pods_exploreApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_exploreApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,7 +120,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				777EEAF12AC2C5DC00E4FD59 /* GoogleService-Info.plist */,
+				778B5F2B2AFC916B002CF4DE /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* exploreApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* exploreAppTests */,
@@ -250,7 +250,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				777EEAF22AC2C5DC00E4FD59 /* GoogleService-Info.plist in Resources */,
+				778B5F2C2AFC916B002CF4DE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,10 +630,7 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 			};
@@ -711,10 +708,7 @@
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
