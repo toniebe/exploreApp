@@ -12,8 +12,8 @@ workflows:
         node: latest
         CM_CLONE_DEPTH: 8
         CM_PULL_REQUEST: true
-        CM_PULL_REQUEST_BASE_BRANCH: main
-
+        XCODE_WORKSPACE: exploreApp
+        XCODE_SCHEME: exploreApp
     triggering:
       events:
         - push
@@ -39,14 +39,14 @@ workflows:
           prev_tag=$(git for-each-ref --sort=-creatordate --format '%(objectname)' refs/tags | sed -n 2p )
           notes=$(git log --oneline "$branch" --pretty=format:"- %s" "$prev_tag"..HEAD)
           echo "[Explore App - $branch] \n\nNotes: \n$notes" | tee release_notes.txt
-      - name: Display changes on pull request
-        script: |
-          if [ "$CM_PULL_REQUEST" != "false" ]; then
-            git fetch origin +refs/heads/*:refs/remotes/origin/*
-            # sesuain variable name di env variable yg di set codemagic
-            git log origin/${CM_PULL_REQUEST_BASE_BRANCH:-main}...HEAD --oneline
-            # ganti branchnya
-          fi
+      # - name: Display changes on pull request
+      #   script: |
+      #     if [ "$CM_PULL_REQUEST" != "false" ]; then
+      #       git fetch origin +refs/heads/*:refs/remotes/origin/*
+      #       # sesuain variable name di env variable yg di set codemagic
+      #       git log origin/${CM_PULL_REQUEST_BASE_BRANCH:-main}...HEAD --oneline
+      #       # ganti branchnya
+      #     fi
       - name: pre_build_script
         script: |
           #!/usr/bin/env sh
@@ -77,8 +77,15 @@ workflows:
           # export LATEST_GOOGLE_PLAY_BUILD_NUMBER=$(($(google-play get-latest-build-number --package-name "$PACKAGE_NAME") + 1))
           # cd hello_world/android/ && ./gradlew assembleDebug
           cd android && ./gradlew assembleRelease
+      - name: Build iOS release
+        script: |
+          # build iOS
+            cd ios
+            pod install
+            xcodebuild build -workspace "$XCODE_WORKSPACE.xcworkspace" -scheme "$XCODE_SCHEME" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
     artifacts:
       - android/app/build/outputs/**/*.apk
+      - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
     publishing:
       # See the following link for details about email publishing - https://docs.codemagic.io/publishing-yaml/distribution/#email
       email:
@@ -88,13 +95,13 @@ workflows:
         notify:
           success: true # To not receive a notification when a build succeeds
           failure: false # To not receive a notification when a build fails
-      firebase:
-        firebase_service_account: $FIREBASE_SERVICE_ACCOUNT
-        android: 
-          app_id: 1:953175852743:android:add8ee72c4c87177f1a0e2
-          groups: 
-            - appTester # following group tester in firebase
-          artifact_type: 'apk'
+      # firebase:
+      #   firebase_service_account: $FIREBASE_SERVICE_ACCOUNT
+      #   android: 
+      #     app_id: 1:953175852743:android:add8ee72c4c87177f1a0e2
+      #     groups: 
+      #       - appTester # following group tester in firebase
+      #     artifact_type: 'apk'
       scripts:
         - name: Discord notification
           script: | 
