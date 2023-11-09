@@ -148,9 +148,6 @@ workflows:
       - name: Install yarn dependencies
         script: |
           yarn
-      - name: build ios react native
-        script: |
-          npx react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'"
       - name: Build iOS release
         script: |
           # build iOS
