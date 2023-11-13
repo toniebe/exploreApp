@@ -84,7 +84,7 @@ workflows:
         android: 
           app_id: 1:953175852743:android:add8ee72c4c87177f1a0e2
           groups: 
-            - "codemagicTester" # following group tester in firebase
+            - "codemagic-tester" # following group tester in firebase
           artifact_type: 'apk'
       scripts:
         - name: Discord notification
