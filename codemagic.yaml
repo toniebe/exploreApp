@@ -96,25 +96,24 @@ workflows:
 
            # Get the public URL for the artifact
            response=$(curl -H "Content-Type: application/json" \
-                -H "x-auth-token: $API_TOKEN" \
+                -H "x-auth-token: $CODEMAGIC_TOKEN" \
                 -d '{"expiresAt": 1735664399}' \
                 -X POST -w "\n%{http_code} %{response_code}" $APP_LINK/public-url)
-
-           # Extract the HTTP status code
-           status_code=$(echo "$response" | awk '{print $1}')
 
            # Extract the response body without the status code
            response_body=$(echo "$response" | sed '$d')
 
-           # Check if the request was successful (HTTP status code 2xx)
-           if [[ $status_code -ge 200 && $status_code -lt 300 ]]; then
-                # Parse the JSON response to extract the 'url' field
-                APP_LINK=$(echo "$response_body" | jq -r '.url')
-                echo "Artifact URL: $APP_LINK"
+          
+           # Extract the response body
+           APP_LINK=$(echo "$response" | jq -r '.url')
+
+           # Check if the URL is non-empty
+           if [ -n "$APP_LINK" ]; then
+            echo "Artifact URL: $APP_LINK"
            else
-                echo "Failed to retrieve the artifact URL. Status code: $status_code"
-                exit 1
-            fi
+            echo "Failed to retrieve the artifact URL."
+            exit 1
+           fi
 
            # Get first 7 digits of commit number
            COMMIT=$(echo "${CM_COMMIT}" | sed 's/^\(........\).*/\1/;q')
@@ -128,7 +127,7 @@ workflows:
 
            # Publish the notification
            curl -H "Content-Type: multipart/form-data" \
-           -F 'payload_json={"username" : "explore-app deployment", "content": "**Commit:** `'"$COMMIT"'`\n\n**Commit message:** '"$COMMIT_MESSAGE"'\n\n**Branch:** '"$CM_BRANCH"'\n\n**Author:** '"$AUTHOR"'\n\n**Artifacts: **\n\n'"$APP_LINK/public-url"'\n\n"}' \
+           -F 'payload_json={"username" : "explore-app deployment", "content": "**Commit:** `'"$COMMIT"'`\n\n**Commit message:** '"$COMMIT_MESSAGE"'\n\n**Branch:** '"$CM_BRANCH"'\n\n**Author:** '"$AUTHOR"'\n\n**Artifacts: **\n\n'"$APP_LINK"'\n\n"}' \
            -F "file1=@release_notes.txt" \
            $WEBHOOK_URL
   # react-native-ios:
