@@ -104,7 +104,8 @@ workflows:
 
            # Extract the response body
            echo "Before extracting URL"
-           APP_LINK=$(echo "$response" | jq -r '.url')
+           # APP_LINK=$(echo "$response" | jq -r '.url')
+           APP_LINK=$(echo "$response" | awk -F'"' '/url/ {print $4}')
            echo "After extracting URL: $APP_LINK"
            echo "Extracted URL: $APP_LINK"
 
