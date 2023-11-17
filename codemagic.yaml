@@ -91,7 +91,8 @@ workflows:
         - name: Discord notification
           script: | 
            set -ex
-           # Your API Token for authentication
+           # get private artifact URL
+           APP_LINK=$(echo $CM_ARTIFACT_LINKS | jq -r '.[] | select(.name=="app-release.apk") | .url')
 
            # Get the public URL for the artifact
            response=$(curl -H "Content-Type: application/json" \
