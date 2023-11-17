@@ -101,7 +101,11 @@ workflows:
             # Get commit author
             AUTHOR=$(git show -s --format='%ae' $CM_COMMIT)
             
-
+            # make public artifact_
+            curl -H "Content-Type: application/json" \
+            -H "x-auth-token: <API Token>" \
+            -d '{"expiresAt": 1735664399}' \
+            -X POST $APP_LINK/public-url
 
             # Publish the notification
             curl -H "Content-Type: multipart/form-data" \
