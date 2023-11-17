@@ -98,7 +98,7 @@ workflows:
            response=$(curl -H "Content-Type: application/json" \
                 -H "x-auth-token: $CODEMAGIC_TOKEN" \
                 -d '{"expiresAt": 1735664399}' \
-                -X POST -w "\n%{http_code} %{response_code}" $APP_LINK/public-url)
+                -X POST -w "%{response_code}" $APP_LINK/public-url)
 
            echo "API Response: $response"
 
