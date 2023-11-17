@@ -101,9 +101,11 @@ workflows:
             # Get commit author
             AUTHOR=$(git show -s --format='%ae' $CM_COMMIT)
             
+
+
             # Publish the notification
             curl -H "Content-Type: multipart/form-data" \
-            -F 'payload_json={"username" : "explore-app deployment", "content": "**Commit:** `'"$COMMIT"'`\n\n**Commit message:** '"$COMMIT_MESSAGE"'\n\n**Branch:** '"$CM_BRANCH"'\n\n**Author:** '"$AUTHOR"'\n\n**Artifacts: **\n\n'"$APP_LINK"'\n\n"}' \
+            -F 'payload_json={"username" : "explore-app deployment", "content": "**Commit:** `'"$COMMIT"'`\n\n**Commit message:** '"$COMMIT_MESSAGE"'\n\n**Branch:** '"$CM_BRANCH"'\n\n**Author:** '"$AUTHOR"'\n\n**Artifacts: **\n\n'"$APP_LINK/public-url"'\n\n"}' \
             -F "file1=@release_notes.txt" \
             $WEBHOOK_URL
   # react-native-ios:
