@@ -103,8 +103,9 @@ workflows:
            echo "API Response: $response"
 
            # Extract the response body
+           echo "Before extracting URL"
            APP_LINK=$(echo "$response" | jq -r '.url')
-
+           echo "After extracting URL: $APP_LINK"
            echo "Extracted URL: $APP_LINK"
 
            # Check if the URL is non-empty
