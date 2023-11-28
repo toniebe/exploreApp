@@ -138,7 +138,7 @@ workflows:
            COMMIT=$(echo "${CM_COMMIT}" | sed 's/^\(........\).*/\1/;q')
 
            # Get commit message
-           COMMIT_MESSAGE=$(git log --format=%B -n 1 $CM_COMMIT | tr '\n')
+           COMMIT_MESSAGE=$(git log --format=%B -n 1 $CM_COMMIT | tr '\n' ' ')
             
            # Get commit author
            AUTHOR=$(git show -s --format='%ae' $CM_COMMIT)
