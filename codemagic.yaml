@@ -22,6 +22,9 @@ workflows:
         - pattern: main
           include: true
           source: true
+        - pattern: codemagic
+          include: true
+          source: true
     scripts:
       - name: Exit build if keyword not defined
         script: | 
