@@ -94,8 +94,8 @@ workflows:
       #     - ahmadfathonizumaro@gmail.com
       #     - toniebe48@gmail.com
       #   notify:
-      #     success: true # To not receive a notification when a build succeeds
-      #     failure: false # To not receive a notification when a build fails
+      #     success: false # To not receive a notification when a build succeeds
+      #     failure: true # To not receive a notification when a build fails
       # firebase:
       #   firebase_service_account: $FIREBASE_SERVICE_ACCOUNT
       #   android: 
