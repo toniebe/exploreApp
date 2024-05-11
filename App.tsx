@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, {useEffect} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SplashScreen from './src/screen/splashscreen/SplashScreen';
 import HomeScreen from './src/screen/home/HomeScreen';
 import TestingScreen from './src/screen/testingscreen/TestingScreen';
 import RegisterScreen from './src/screen/register/RegisterScreen';
 import LoginScreen from './src/screen/Login/LoginScreen';
 import Chat from './src/screen/Chat';
-import notifee, { AuthorizationStatus } from '@notifee/react-native';
-import { PermissionsAndroid } from 'react-native';
+import notifee, {AuthorizationStatus} from '@notifee/react-native';
+import {PermissionsAndroid, Platform} from 'react-native';
 import Notification from './src/screen/Notification/Notification';
 
 const Stack = createNativeStackNavigator();
@@ -24,25 +24,28 @@ const App = () => {
     }
   }
 
-  
-
   const requestCameraPermission = async () => {
     try {
-      await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA, {
-        title: 'Cool Photo App Camera Permission',
-        message:
-          'Cool Photo App needs access to your camera ' +
-          'so you can take awesome pictures.',
-        buttonNeutral: 'Ask Me Later',
-        buttonNegative: 'Cancel',
-        buttonPositive: 'OK',
-      });
-      await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
-      );
-      await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.READ_MEDIA_AUDIO,
-      );
+      if (Platform.OS === 'android') {
+        await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.CAMERA,
+          {
+            title: 'Cool Photo App Camera Permission',
+            message:
+              'Cool Photo App needs access to your camera ' +
+              'so you can take awesome pictures.',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          },
+        );
+        await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+        );
+        await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.READ_MEDIA_AUDIO,
+        );
+      }
     } catch (err) {
       console.warn(err);
     }
@@ -57,27 +60,27 @@ const App = () => {
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Register"
           component={RegisterScreen}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Login"
           component={LoginScreen}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Chat"
           component={Chat}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
         <Stack.Screen
           name="Notification"
