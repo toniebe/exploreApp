@@ -20,7 +20,7 @@ export default function SplashScreen({navigation}) {
             'No configs were fetched from the backend, and the local configs were already activated',
           );
         }
-        navigation.navigate('Home');
+        navigation.navigate('Login');
       });
     // checkToken();
     getPermission();

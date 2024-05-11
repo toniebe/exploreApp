@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">exploreApp</string>
+    <string name="default_notification_channel_id">d2dpushnotif-channel</string>
 </resources>

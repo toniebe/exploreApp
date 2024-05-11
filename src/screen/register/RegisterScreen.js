@@ -1,34 +1,52 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
-import React, {useState} from 'react';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import React, { useState } from 'react';
 import Button from '../../component/Button';
 import auth from '@react-native-firebase/auth';
+import { pb } from '../../helper/pocketbase';
 
-const RegisterScreen = ({navigation}) => {
+const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disable, setDisable] = useState(false);
   const handleRegister = async () => {
     setDisable(true);
 
-    auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(data => {
-        let user = JSON.stringify(data.user);
+    try {
+      const data = {
+        email: email,
+        username: `User-${Math.random(0, 100)}`,
+        password,
+        passwordConfirm: password,
+        name: `UserName-${Math.random(0, 100)}`,
+        emailVisibility: true,
+      };
 
-        setEmail('');
-        setPassword('');
-        setTimeout(() => navigation.replace('Login'), 2000);
-        setDisable(false);
-      })
-      .catch(error => {
-        if (error.code === 'auth/email-already-in-use') {
-          setDisable(false);
-        }
+      const createdUser = await pb.collection('users').create(data);
 
-        if (error.code === 'auth/invalid-email') {
+      console.log('tonlog created user', createdUser);
+
+      auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(data => {
+          let user = JSON.stringify(data.user);
+
+          setEmail('');
+          setPassword('');
+          setTimeout(() => navigation.replace('Login'), 2000);
           setDisable(false);
-        }
-      });
+        })
+        .catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            setDisable(false);
+          }
+
+          if (error.code === 'auth/invalid-email') {
+            setDisable(false);
+          }
+        });
+    } catch (err) {
+      console.log('err: ', err);
+    }
   };
   return (
     <View style={styles.container}>
