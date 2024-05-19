@@ -10,6 +10,7 @@ import Chat from './src/screen/Chat';
 import notifee, {AuthorizationStatus} from '@notifee/react-native';
 import {PermissionsAndroid, Platform} from 'react-native';
 import Notification from './src/screen/Notification/Notification';
+import NotificationExample from './src/screen/NotificationExample';
 
 const Stack = createNativeStackNavigator();
 
@@ -85,6 +86,11 @@ const App = () => {
         <Stack.Screen
           name="Notification"
           component={Notification}
+          // options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="NotificationExample"
+          component={NotificationExample}
           // options={{ headerShown: false }}
         />
         <Stack.Screen name="Testing" component={TestingScreen} />

@@ -172,6 +172,7 @@ const HomeScreen = ({navigation, route}) => {
         /> */}
         <Button title={'notifikasi'} onPress={onDisplayNotification} />
         <Button title={'notifikasi screen'} onPress={() => navigation.navigate('Notification')} />
+        <Button title={'notifikasi Example'} onPress={() => navigation.navigate('NotificationExample')} />
         {/* <Button
           title={getRemoteConfigValue('button_next_testing').asString()}
           onPress={() => navigation.navigate('Testing')}
