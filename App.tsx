@@ -12,6 +12,7 @@ import {PermissionsAndroid, Platform} from 'react-native';
 import Notification from './src/screen/Notification/Notification';
 import NotificationExample from './src/screen/NotificationExample';
 import NotificationCustom from './src/screen/NotificationCustom';
+import NotificationExIos from './src/screen/NotificationExIos';
 
 const Stack = createNativeStackNavigator();
 
@@ -92,12 +93,19 @@ const App = () => {
         <Stack.Screen
           name="NotificationExample"
           component={NotificationExample}
-          // options={{ headerShown: false }}
+          // options={{ headerShown: fa`lse }}
         />
+
         <Stack.Screen
           name="NotificationCustom"
           component={NotificationCustom}
+
           // options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="NotificationExIos"
+          component={NotificationExIos}
+          // options={{ headerShown: fa`lse }}
         />
         <Stack.Screen name="Testing" component={TestingScreen} />
       </Stack.Navigator>
