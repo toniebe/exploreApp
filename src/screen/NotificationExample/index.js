@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import notifee, {
   AndroidBadgeIconType,
@@ -21,41 +21,42 @@ const NotificationExample = () => {
     });
     await notifee.displayNotification({
       title:
-        'GEGE BANGUNIN GOJO, TOJI KAPAN YA DIBANGUNIN DAH PENASARAN PARAHHH',
-      body: 'Untuk Anda: VAnimee',
+        'FAKTA MENARIK SEPUTAR KESEHATAN GIGI, NOMOR 3 BIKIN KAMU MERINDING',
+      body: 'Postingan baru medstalk: dr. Bahagia',
       android: {
         channelId: channelId,
         color: '#D83A76',
         smallIcon: 'ic_notification_3',
         largeIcon:
-          'https://c4.wallpaperflare.com/wallpaper/622/941/214/jujutsu-kaisen-satoru-gojo-hd-wallpaper-preview.jpg',
+          'https://dk4fkkwa4o9l0.cloudfront.net/production/uploads/article/image/676/male-professional-dentist-with-gloves-mask-discuss-what-treatment-will-look-like-patient-s-teeth.jpg',
         timestamp: Date.now(),
         showTimestamp: true,
         style: {
           type: AndroidStyle.BIGPICTURE,
           picture:
-            'https://c4.wallpaperflare.com/wallpaper/622/941/214/jujutsu-kaisen-satoru-gojo-hd-wallpaper-preview.jpg',
+            'https://dk4fkkwa4o9l0.cloudfront.net/production/uploads/article/image/676/male-professional-dentist-with-gloves-mask-discuss-what-treatment-will-look-like-patient-s-teeth.jpg',
           title:
-            'GEGE BANGUNIN GOJO, TOJI KAPAN YA DIBANGUNIN DAH PENASARAN PARAHHH',
-          summary: 'Untuk Anda: VAnimee',
+            'FAKTA MENARIK SEPUTAR KESEHATAN GIGI, NOMOR 3 BIKIN KAMU MERINDING',
+          summary: 'Postingan baru medstalk: dr. Bahagia',
         },
         actions: [
           {
-            title: '<p style="color: #D83A76;"><b>PUTAR</b></p>',
+            title: '<p style="color: #D83A76;"><b>SUKA</b></p>',
             icon: 'https://my-cdn.com/icons/reply.png',
             pressAction: {
               id: 'play',
             },
           },
           {
-            title: '<p style="color:#D83A76;"><b>NONAKTIFKAN</b></p>',
+            title: '<p style="color:#D83A76;"><b>BERI KOMENTAR</b></p>',
             icon: 'https://my-cdn.com/icons/reply.png',
             pressAction: {
               id: 'nonaktifkan',
             },
+            input: true,
           },
           {
-            title: '<p style="color: #D83A76;"><b>TONTON NANTI</b></p>',
+            title: '<p style="color: #D83A76;"><b>BOOKMARK</b></p>',
             icon: 'https://my-cdn.com/icons/reply.png',
             pressAction: {
               id: 'watch-later',
@@ -76,22 +77,52 @@ const NotificationExample = () => {
       importance: AndroidImportance.HIGH,
     });
     await notifee.displayNotification({
-      body: '<p style="margin-left: 10px;">Ebe Zumaro, Anda memiliki saran teman baru: Han so hee</p>',
+      title: 'Han so hee',
+      body: 'Masih sakit perut dan sedikit merasa mual dok!',
       android: {
         channelId: channelId,
         color: '#D83A76',
         smallIcon: 'ic_notification_3',
-        largeIcon:
-          'https://www.blibli.com/friends-backend/wp-content/uploads/2023/11/B1100592-Cover-Drama-Han-So-Hee.jpg',
-        timestamp: Date.now(),
+        // timestamp: Date.now(),
         showTimestamp: true,
         style: {
-          type: AndroidStyle.BIGPICTURE,
-          picture:
-            'https://www.blibli.com/friends-backend/wp-content/uploads/2023/11/B1100592-Cover-Drama-Han-So-Hee.jpg',
-          summary:
-            '<p style="margin-left: 10px;">Ebe Zumaro, Anda memiliki saran teman baru: Han so hee</p>',
+          type: AndroidStyle.MESSAGING,
+          person: {
+            name: 'dr. Bahagia',
+            icon: 'https://asset-2.tstatic.net/tribunnews/foto/bank/images/dikta-mundur-dari-yovie-and-nuno.jpg',
+          },
+          messages: [
+            {
+              text: 'Hey, how are you?',
+              timestamp: Date.now() - 600000, // 10 minutes ago
+            },
+            {
+              text: 'Masih sakit perut dan sedikit merasa mual dok!',
+              timestamp: Date.now(), // Now
+              person: {
+                name: 'Han so hee',
+                icon: 'https://www.blibli.com/friends-backend/wp-content/uploads/2023/11/B1100592-Cover-Drama-Han-So-Hee.jpg',
+              },
+            },
+          ],
         },
+        actions: [
+          {
+            title: '<p style="color: #D83A76;">SUKA</p>',
+            icon: 'https://my-cdn.com/icons/reply.png',
+            pressAction: {
+              id: 'like',
+            },
+          },
+          {
+            title: '<p style="color:#D83A76;">BALAS</p>',
+            icon: 'https://my-cdn.com/icons/reply.png',
+            pressAction: {
+              id: 'reply',
+            },
+            input: true,
+          },
+        ],
       },
     });
   };
@@ -105,27 +136,19 @@ const NotificationExample = () => {
       lightColor: AndroidColor.RED,
       importance: AndroidImportance.HIGH,
     });
-    notifee.registerForegroundService(notification => {
-      return new Promise(() => {});
-    });
+    // notifee.registerForegroundService(notification => {
+    //   return new Promise(() => { });
+    // });
 
     notifee.displayNotification({
-      title: '<p style="color: #0a9830;"><b>Grab</b><span>Food</span></p>',
-      body: '<p style="color: #FFFFFF;"><b>Sampai pada<b> <span style="color: #0a9830;">07:20 PM - 07:35PM</span></p>',
+      title: '<p style="color: #D83A76;"><b>D2D</b></p>',
+      body: '<p style="color: #FFFFFF;"><b>Sampai pada<b> <span style="color: #D83A76;">07:20 PM - 07:35PM</span></p>',
       android: {
         channelId: channelId,
-        color: '#1E1E1E',
+        color: '#D83A76',
         smallIcon: 'ic_notification_3',
-        // badgeIconType: AndroidBadgeIconType.SMALL,
-
-        // largeIcon: 'https://www.jagel.id/api/listimage/v/OJEK-MOTOR-0-1655c3805b05ccb4.jpg',
-        // circularLargeIcon: true,
-        // ongoing: true,
-        colorized: true,
         timestamp: Date.now(),
         showTimestamp: true,
-        asForegroundService: true,
-
         progress: {
           current: 70,
           max: 100,
@@ -133,57 +156,22 @@ const NotificationExample = () => {
         style: {
           type: AndroidStyle.BIGTEXT,
           summary:
-            '<p style="color: #0a9830;"><b>Grab</b><span>Food</span></p>',
+            '<p style="color: #D83A76;"><b>D2D</b><span>Dkonsul</span></p>',
           title:
-            '<p><b>Sampai pada<b> <span style="color: #0a9830;">07:20 PM - 07:35PM</span></p>',
-          text: 'Makananmu sedang diantar ke rumahmu, mohon ditunggu ya!',
+            '<p><b>Sampai pada<b> <span style="color: #D83A76;">07:20 PM - 07:35PM</span></p>',
+          text: 'Obat sedang diantar ke rumahmu, mohon ditunggu ya!',
         },
       },
     });
 
-    await notifee.stopForegroundService();
-  };
-
-  const triggerNotificationWithCustomComponent = async () => {
-    console.log('trigger');
-    const date = new Date(Date.now());
-    date.setSeconds(date.getSeconds() + 3);
-
-    const channelId = await notifee.createChannel({
-      id: 'd2d-custom55',
-      name: 'd2d-custom3',
-      sound: 'dkonsul',
-      lights: true,
-      lightColor: AndroidColor.RED,
-      importance: AndroidImportance.HIGH,
-    });
-
-    await notifee.createTriggerNotification(
-      {
-        title: 'New trigger notification',
-        android: {
-          channelId: channelId,
-          pressAction: {
-            id: 'default',
-            launchActivity: 'default',
-            // launchActivityFlags: [AndroidLaunchActivityFlag.SINGLE_TOP],
-            mainComponent: 'custom-component',
-          },
-        },
-      },
-      {type: 0, timestamp: date.getTime()},
-    );
+    // await notifee.stopForegroundService();
   };
 
   return (
     <View>
-      <Button title="Youtube Notification" onPress={YoutubeNotification} />
-      <Button title="Facebook Notification" onPress={FacebookNotification} />
-      <Button title="Grab Notification" onPress={GrabNotification} />
-      <Button
-        title="Tigger Notification"
-        onPress={triggerNotificationWithCustomComponent}
-      />
+      <Button title="Big Picture Notification" onPress={YoutubeNotification} />
+      <Button title="Messaging Notification" onPress={FacebookNotification} />
+      <Button title="Progress Notification" onPress={GrabNotification} />
     </View>
   );
 };
