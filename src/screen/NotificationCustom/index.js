@@ -8,10 +8,6 @@ const NotificationCustom = () => {
   // const navigation = useNavigation();
   const appRegis = () => {
     RootTagContext.displayName('exploreApp');
-  // AppRegistry.getRunnable('exploreApp').run({
-  //   initialProps:{},
-  //   rootTag: 
-  // })
   }
   return (
     <View style={{ backgroundColor: 'khaki' }}>

@@ -1,11 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import notifee, {
   AndroidBadgeIconType,
+  AndroidCategory,
   AndroidColor,
   AndroidImportance,
   AndroidLaunchActivityFlag,
   AndroidStyle,
+  AndroidVisibility,
+  TriggerType,
 } from '@notifee/react-native';
 import Button from '../../component/Button';
 
@@ -167,11 +170,74 @@ const NotificationExample = () => {
     // await notifee.stopForegroundService();
   };
 
+  const callNotification = async () => {
+    notifee.createChannel({
+      id: 'test',
+      name: 'Firing alarms & timers',
+      lights: false,
+      vibration: true,
+      importance: AndroidImportance.HIGH,
+      sound: 'wa',
+    });
+
+    const timestampDate = new Date(Date.now());
+    timestampDate.setSeconds(timestampDate.getSeconds() + 5); //now + 5 seconds
+    console.log(timestampDate.getTime());
+
+    // Create a time-based trigger
+    const trigger = {
+      type: TriggerType.TIMESTAMP,
+      timestamp: timestampDate.getTime(), // fire at 11:10am (10 minutes before meeting)
+    };
+
+    // Create a trigger notification
+    await notifee.createTriggerNotification(
+      {
+        title: 'Han',
+        body: 'Body',
+        android: {
+          channelId: 'test',
+          category: AndroidCategory.CALL,
+          visibility: AndroidVisibility.PUBLIC,
+          importance: AndroidImportance.HIGH,
+          timestamp: Date.now(),
+          showTimestamp: true,
+
+          pressAction: {
+            id: 'default',
+            launchActivity: 'com.exploreapp.CustomActivity',
+          },
+          actions: [
+            {
+              title: 'TOLAK',
+              pressAction: {
+                id: 'option2',
+              },
+            },
+            {
+              title: 'JAWAB',
+              pressAction: {
+                id: 'option1',
+                launchActivity: 'com.exploreapp.CustomActivity',
+              },
+            },
+          ],
+          fullScreenAction: {
+            id: 'default',
+            launchActivity: 'com.exploreapp.CustomActivity',
+          },
+        },
+      },
+      trigger,
+    );
+  };
+
   return (
     <View>
       <Button title="Big Picture Notification" onPress={YoutubeNotification} />
       <Button title="Messaging Notification" onPress={FacebookNotification} />
       <Button title="Progress Notification" onPress={GrabNotification} />
+      <Button title="Call Notification" onPress={callNotification} />
     </View>
   );
 };

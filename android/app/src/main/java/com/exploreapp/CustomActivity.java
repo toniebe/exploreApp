@@ -12,16 +12,4 @@ public class CustomActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "custom-component";
   }
-    @Override
-   protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        // Start the main activity
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
-
-        // Finish this activity so it's removed from the back stack
-        finish();
-    }
 }
