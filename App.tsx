@@ -12,6 +12,10 @@ import {PermissionsAndroid, Platform} from 'react-native';
 import Notification from './src/screen/Notification/Notification';
 import NotificationExample from './src/screen/NotificationExample';
 import NotificationExIos from './src/screen/NotificationExIos';
+import RealmPage from './src/screen/Realm';
+import Realm from 'realm';
+import { RealmProvider } from '@realm/react';
+import { CallPlan } from './src/schema';
 
 const Stack = createNativeStackNavigator();
 
@@ -57,8 +61,9 @@ const App = () => {
     requestCameraPermission();
   }, []);
   return (
+    <RealmProvider schema={[CallPlan]}>
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName='Home'>
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
@@ -99,9 +104,15 @@ const App = () => {
           component={NotificationExIos}
           // options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="RealmPage"
+          component={RealmPage}
+          // options={{ headerShown: false }}
+        />
         <Stack.Screen name="Testing" component={TestingScreen} />
       </Stack.Navigator>
     </NavigationContainer>
+    </RealmProvider>
   );
 };
 

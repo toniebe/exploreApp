@@ -13,8 +13,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		68B706E54C037B51A48B2EBB /* Pods_exploreApp_exploreAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66DEF79A5D67FB2AEB966CCA /* Pods_exploreApp_exploreAppTests.framework */; };
 		774C37392AFCC4060082B27B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 774C37382AFCC4060082B27B /* GoogleService-Info.plist */; };
-		77A1B6BA2BEDFA6800D244FA /* dkonsul.wav in Resources */ = {isa = PBXBuildFile; fileRef = 77A1B6B82BEDFA6800D244FA /* dkonsul.wav */; };
-		77A1B6BB2BEDFA6800D244FA /* hollow.wav in Resources */ = {isa = PBXBuildFile; fileRef = 77A1B6B92BEDFA6800D244FA /* hollow.wav */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		CCC097D3B4B7C350A4CE8AA3 /* Pods_exploreApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA377E71317831541B9B2C76 /* Pods_exploreApp.framework */; };
 /* End PBXBuildFile section */
@@ -58,8 +56,6 @@
 		66DEF79A5D67FB2AEB966CCA /* Pods_exploreApp_exploreAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_exploreApp_exploreAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		774333502AC2E10B00A3E204 /* exploreApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = exploreApp.entitlements; path = exploreApp/exploreApp.entitlements; sourceTree = "<group>"; };
 		774C37382AFCC4060082B27B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		77A1B6B82BEDFA6800D244FA /* dkonsul.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dkonsul.wav; sourceTree = "<group>"; };
-		77A1B6B92BEDFA6800D244FA /* hollow.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = hollow.wav; path = ../../../../Desktop/hollow.wav; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = exploreApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-exploreApp-exploreAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-exploreApp-exploreAppTests.release.xcconfig"; path = "Target Support Files/Pods-exploreApp-exploreAppTests/Pods-exploreApp-exploreAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		EA377E71317831541B9B2C76 /* Pods_exploreApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_exploreApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,8 +133,6 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				77A1B6B82BEDFA6800D244FA /* dkonsul.wav */,
-				77A1B6B92BEDFA6800D244FA /* hollow.wav */,
 				774C37382AFCC4060082B27B /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* exploreApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -272,8 +266,6 @@
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				774C37392AFCC4060082B27B /* GoogleService-Info.plist in Resources */,
-				77A1B6BB2BEDFA6800D244FA /* hollow.wav in Resources */,
-				77A1B6BA2BEDFA6800D244FA /* dkonsul.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -663,7 +655,8 @@
 					"-ld_classic",
 					"-Wl",
 					"-ld_classic",
-					"-Wl -ld_classic ",
+					"-Wl",
+					"-ld_classic",
 				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
@@ -750,7 +743,8 @@
 					"-ld_classic",
 					"-Wl",
 					"-ld_classic",
-					"-Wl -ld_classic ",
+					"-Wl",
+					"-ld_classic",
 				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;

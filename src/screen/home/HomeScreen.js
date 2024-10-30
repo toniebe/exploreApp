@@ -202,6 +202,7 @@ const HomeScreen = ({navigation, route}) => {
           }}
         /> */}
 
+        <Button title="Realm Page" onPress={() => navigation.navigate('RealmPage')} />
         <Button title="Logout" onPress={() => handleLogout()} />
       </View>
     </SafeAreaView>
